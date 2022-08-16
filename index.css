@@ -1,0 +1,12 @@
+body {
+    display: flex;
+}
+
+
+/* Style for the grid and its cells */
+#canvas {
+    display: grid;
+}
+.border {
+    border: 1px solid #63beb7;
+}

@@ -1,19 +1,31 @@
 const canvas = document.getElementById("canvas");
 const slider = document.getElementById("slider");
-let sliderOutput = document.getElementById("slider-text");
+const sliderOutput = document.getElementById("slider-text");
 
+
+function randomColor() {
+    const r = Math.floor(( Math.random() * 256));
+    const g = Math.floor(( Math.random() * 256));
+    const b = Math.floor(( Math.random() * 256));
+    return `rgb(${r}, ${g}, ${b})`;
+   
+}
+
+function cellClick() {
+    this.style.backgroundColor = randomColor();
+}
 
 /**
  * Creates a grid based on parameters. A border is added to each grid cell
  * @param {*} size NxN size of the grid
  * @param {*} border boolean indicating if border should be on or not
  */
-function createGrid(size=16, border) {
+function createGrid(size=16) {
     for (let i=0; i < size*size; i++) {
         const newDiv = document.createElement("div");
-        if (border) {
-           newDiv.classList.add("border");
-        }
+        newDiv.classList.add("cell-hover");
+        newDiv.classList.add("cell-active");
+        newDiv.classList.add("border");
         canvas.appendChild(newDiv);
     }
 
@@ -21,6 +33,7 @@ function createGrid(size=16, border) {
     let side = 650/size;
     canvas.style.gridTemplate = `repeat(${size}, ${side}px) / repeat(${size},  ${side}px)`;
 }
+
 
 function removeGrid() {
     while (canvas.firstChild) {

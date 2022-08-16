@@ -1,12 +1,7 @@
-let currentSize;
-
 const canvas = document.getElementById("canvas");
 const slider = document.getElementById("slider");
 let sliderOutput = document.getElementById("slider-text");
 
-window.onload = (event) => {
-    sliderOutput.textContent = slider.value;  // set slider's text to the slider' default value at start
-}
 
 /**
  * Creates a grid based on parameters. A border is added to each grid cell
@@ -23,13 +18,27 @@ function createGrid(size=16, border) {
     }
 
     // specify grid-template parameters to arrange how the the grids look
-    canvas.style.gridTemplate = `repeat(${size}, 20px) / repeat(${size}, 20px)`;
+    let side = 650/size;
+    canvas.style.gridTemplate = `repeat(${size}, ${side}px) / repeat(${size},  ${side}px)`;
+}
+
+function removeGrid() {
+    while (canvas.firstChild) {
+        canvas.removeChild(canvas.lastChild);
+      }
 }
 
 
-// every time the slider is toggled, its value is shown through p tag's text
+window.onload = (event) => {
+    sliderOutput.textContent = `${slider.value} x ${slider.value}`;  // set slider's text to the slider' default value at start
+    createGrid(this.value, true);
+}
+
+
+
+// every time the slider is toggled, its value is shown through p tag's text and a new grid is made
 slider.oninput = function() {
-    sliderOutput.textContent = this.value;
+    sliderOutput.textContent = `${this.value} x ${this.value}`;
+    removeGrid();
+    createGrid(this.value, true);
 }
-
-createGrid(currentSize, true);

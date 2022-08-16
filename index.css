@@ -10,3 +10,13 @@ body {
 .border {
     border: 1px solid #63beb7;
 }
+
+
+.menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.slider-container {
+    display: flex;
+}

@@ -1,19 +1,19 @@
-.main-content {
-    display: flex;
-    justify-content: space-around;
-}
-
 h1 {
     text-align: center;
 }
-.menu {
-    background-color: rgb(213, 231, 231);
-    border: none;
-    border-radius: 25px;
-    padding: 30px;
+
+/* Style for grid and the menu's container */
+.main-content {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
 }
 
+
 /* Style for the grid and its cells */
+.canvas-container {
+    display: flex;
+}
 #canvas {
     display: grid;
     width: 650px;
@@ -25,12 +25,67 @@ h1 {
 }
 
 
-
+/* Style for the whole menu */
 .menu {
     display: flex;
     flex-direction: column;
+    background-color: rgb(213, 231, 231);
+    border: none;
+    border-radius: 25px;
+    padding: 30px;
 }
+
+
+
 
 .slider-container {
     display: flex;
+    justify-content: center;
+}
+
+
+/* Style for the buttons that interact with the physical grid */
+.interactive-container {
+    display: flex;
+    align-items: center;
+    height: 230px;
+    flex-direction: column;
+    background-color: #63beb7;
+    padding: 0;
+    padding-top: 5px;
+    margin: 0;
+}
+.interactive-btn {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+}
+.interactive-btn img {
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    height: auto;
+}
+.interactive-btn:hover {
+    background-color: rgb(185, 203, 203);
+}
+#pickColour {
+    width: 50px;
+    height: 50px;
+    border: 1px solid white;
+    border-radius: 50px;
+}
+
+
+.palette-container {
+    display: grid;
+    grid-template-columns: 150px 150px;
+    padding-top: 50px;
+}
+.palette {
+    padding: 5px 10px;
+    margin: 20px 20px;
 }

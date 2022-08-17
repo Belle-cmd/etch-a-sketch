@@ -11,22 +11,33 @@
 <body>
     <h1>Pixel Canvas</h1>
     <div class="main-content">
-        <div id="canvas"></div>
+        <div class="canvas-container">
+            <div class="interactive-container">
+                <button class="interactive-btn" id="pickColour"></button>
+                <button class="interactive-btn" id="eraser">
+                    <img src="img/eraser.png" alt="">
+                </button>
+                <button class="interactive-btn" id="eyedrop">
+                    <img src="img/eyedropper.png" alt="">
+                </button>
+                <button class="interactive-btn" id="trash">
+                    <img src="img/x.png" alt="">
+                </button>
+            </div>
+            <div id="canvas"></div>
+        </div>
         <div class="menu">
             <div class="slider-container">
                 <input type="range" min="1" max="64" value="16" id="slider">
                 <p id="slider-text"></p>
             </div>
-            <div class="interact-canvas-menu">
-                <button>Eraser</button>
-                <button>Eyedrop</button>
-                <button>Color</button>
+            <div class="palette-container">
+                <button class="palette" id="randomize">Rainbow</button>
+                <button class="palette" id="warm">Warm</button>
+                <button class="palette" id="cold">Cold</button>
+                <button class="palette" id="bubblegum">Bubblegum</button>
+                <button class="palette" id="monochrome">Monochrome</button>
             </div>
-            <button id="randomize">Rainbow</button>
-            <button id="warm">Warm</button>
-            <button id="cold">Cold</button>
-            <button id="bubblegum">Bubblegum</button>
-            <button id="monochrome">Monochrome</button>
         </div>
     </div>
 

@@ -8,6 +8,9 @@ const bubblegumBtnID = document.getElementById("bubblegum");
 const monochromeBtnID = document.getElementById("monochrome");
 let isToggling = false;
 let colourMode = "";  // signifies what colour a div's background should have
+const warm = ["#ffedbf", "#ffcd74", "#ffca7b", "#ff7251", "#9b2948", "#cf6d23", "#f5bc11", "#cf2743"];
+const cold = ["#eff6e0", "#aec3b0", "#598392", "#124559", "#aef2ee", "#9195B8", "#C8B7BE", "#6E8FCA"];
+const bubblegum = ["#fbb9c5", "#e6c8fe", "#fcf7e3", "#c3edbf", "#b8dfe6", "#a14a76", "#ffa8a9", "#2c0915"];
 
 
 /**
@@ -76,8 +79,19 @@ function toggle(e) {
     // e.target is the cell that initiated the event
     if (colourMode==="rainbow") {
         e.target.style.backgroundColor = randomPalette();
+    } else if (colourMode==="warm") {
+        const index = Math.floor(Math.random() * warm.length);
+        e.target.style.backgroundColor = warm[index];
+    } else if (colourMode==="cold") {
+        const index = Math.floor(Math.random() * cold.length);
+        e.target.style.backgroundColor = cold[index];
+    } else if (colourMode==="bubblegum") {
+        const index = Math.floor(Math.random() * bubblegum.length);
+        e.target.style.backgroundColor = bubblegum[index];
+    } else if (colourMode==="monochrome") {
+        
     }
-  }
+}
   /**
    * Function that uses enableToggle(), toggle(), disableToggle() to colour div backgrounds
    */
@@ -89,6 +103,11 @@ function colorCells() {
       canvas.onmouseup = disableToggle;  // only disable divs' colouring when mouse is outside the canvas
 }
 
+rainbowBtnID.addEventListener("click", () => {colourMode = "rainbow"});
+warmBtnID.addEventListener("click", () => {colourMode = "warm"});
+coldBtnID.addEventListener("click", () => {colourMode = "cold"});
+bubblegumBtnID.addEventListener("click", () => {colourMode = "bubblegum"});
+monochromeBtnID.addEventListener("click", () => {colourMode = "monochrome"});
 
 
 window.onload = (event) => {

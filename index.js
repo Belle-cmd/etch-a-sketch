@@ -1,19 +1,13 @@
 const canvas = document.getElementById("canvas");
 const slider = document.getElementById("slider");
 const sliderOutput = document.getElementById("slider-text");
+const rainbowBtnID = document.getElementById("randomize");
+const warmBtnID = document.getElementById("warm");
+const coldBtnID = document.getElementById("cold");
+const bubblegumBtnID = document.getElementById("bubblegum");
+const monochromeBtnID = document.getElementById("monochrome");
 
 
-function randomColor() {
-    const r = Math.floor(( Math.random() * 256));
-    const g = Math.floor(( Math.random() * 256));
-    const b = Math.floor(( Math.random() * 256));
-    return `rgb(${r}, ${g}, ${b})`;
-   
-}
-
-function cellClick() {
-    this.style.backgroundColor = randomColor();
-}
 
 /**
  * Creates a grid based on parameters. A border is added to each grid cell
@@ -34,19 +28,20 @@ function createGrid(size=16) {
     canvas.style.gridTemplate = `repeat(${size}, ${side}px) / repeat(${size},  ${side}px)`;
 }
 
-
+/**
+ * Remove all the grid cells
+ */
 function removeGrid() {
-    while (canvas.firstChild) {
-        canvas.removeChild(canvas.lastChild);
-      }
+    canvas.textContent = "";
 }
+
+
 
 
 window.onload = (event) => {
     sliderOutput.textContent = `${slider.value} x ${slider.value}`;  // set slider's text to the slider' default value at start
     createGrid(this.value, true);
 }
-
 
 
 // every time the slider is toggled, its value is shown through p tag's text and a new grid is made

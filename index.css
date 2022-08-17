@@ -24,12 +24,6 @@ h1 {
 }
 
 
-/* Style applied to cells */
-.cell-hover:hover {
-    background-color: rgb(210, 239, 230);
-}
-
-
 
 .menu {
     display: flex;

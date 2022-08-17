@@ -6,7 +6,8 @@ const warmBtnID = document.getElementById("warm");
 const coldBtnID = document.getElementById("cold");
 const bubblegumBtnID = document.getElementById("bubblegum");
 const monochromeBtnID = document.getElementById("monochrome");
-
+let isToggling = false;
+let colourMode = "";  // signifies what colour a div's background should have
 
 
 /**
@@ -17,16 +18,23 @@ const monochromeBtnID = document.getElementById("monochrome");
 function createGrid(size=16) {
     for (let i=0; i < size*size; i++) {
         const newDiv = document.createElement("div");
-        newDiv.classList.add("cell-hover");
-        newDiv.classList.add("cell-active");
         newDiv.classList.add("border");
+        newDiv.classList.add("cell-hover");
         canvas.appendChild(newDiv);
     }
-
     // specify grid-template parameters to arrange how the the grids look
     let side = 650/size;
     canvas.style.gridTemplate = `repeat(${size}, ${side}px) / repeat(${size},  ${side}px)`;
+    colorCells();
 }
+
+function randomPalette() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
 
 /**
  * Remove all the grid cells
@@ -36,11 +44,57 @@ function removeGrid() {
 }
 
 
+// functions in charge of changing cell colours
+
+/**
+ * Changes isToggling to true to start toggle() to find the element that received the event
+ * @param {*} e mouse event
+ */ 
+function enableToggle(e) {
+    isToggling = true;
+    if (e.target !== canvas) {
+      toggle(e);
+    }
+}
+/**
+ * Turns off isToggling to indicate that 
+ */
+function disableToggle() {
+    console.log('disableToggle');
+    isToggling = false;
+  }
+  /**
+   * Changes cell colour by finding the cell that triggered the event and styling it. This is the function
+   * in charge of colouring all the other divs that the mouse touches.
+   * @param {*} e mouse event used to find the cell that triggered the event
+   * @returns 
+   */
+function toggle(e) {
+    if (isToggling === false) {
+      return;
+    }
+    // e.target is the cell that initiated the event
+    if (colourMode==="rainbow") {
+        e.target.style.backgroundColor = randomPalette();
+    }
+  }
+  /**
+   * Function that uses enableToggle(), toggle(), disableToggle() to colour div backgrounds
+   */
+function colorCells() {
+    canvas.onmousedown = enableToggle;
+    for (let i = 0; i < canvas.children.length; i++) {
+        canvas.children[i].onmouseenter = toggle;  // change div's colour whenever mouse enter's its element borders
+    }
+      canvas.onmouseup = disableToggle;  // only disable divs' colouring when mouse is outside the canvas
+}
+
 
 
 window.onload = (event) => {
-    sliderOutput.textContent = `${slider.value} x ${slider.value}`;  // set slider's text to the slider' default value at start
-    createGrid(this.value, true);
+    sliderOutput.textContent = `${slider.value} x ${slider.value}`;
+    colourMode="rainbow";
+    createGrid();
 }
 
 
@@ -48,5 +102,5 @@ window.onload = (event) => {
 slider.oninput = function() {
     sliderOutput.textContent = `${this.value} x ${this.value}`;
     removeGrid();
-    createGrid(this.value, true);
+    createGrid(this.value);
 }

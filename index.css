@@ -53,6 +53,11 @@ h1 {
 .slider-container {
     display: flex;
     justify-content: center;
+    gap: 20px;
+}
+.slider-container p {
+    padding: 10px 5px;
+    font-size: 30px;
 }
 
 
@@ -95,7 +100,6 @@ h1 {
 .palette-container {
     display: grid;
     grid-template-columns: 150px 150px;
-    padding-top: 50px;
 }
 .palette {
     font-family: inherit;

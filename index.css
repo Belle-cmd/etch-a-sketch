@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,700');
+
 body {
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
-    min-height: 100vh;  /* This including flex-direction column help keep the footer to the bottom */
+    min-height: 100vh;  /* This, flex-direction column, and margin help keep the footer to the bottom */
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
 }
 h1 {
     text-align: center;
@@ -41,6 +44,7 @@ h1 {
     border: none;
     border-radius: 25px;
     padding: 30px;
+    height: 400px;
 }
 
 
@@ -94,8 +98,21 @@ h1 {
     padding-top: 50px;
 }
 .palette {
-    padding: 5px 10px;
-    margin: 20px 20px;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 10px 15px;
+    margin: 20px 15px;
+    background-color: rgb(225, 247, 253);
+    border: 2px solid rgb(139, 172, 197);
+    border-radius: 15px;
+    box-shadow: 0 6px 0 0 #aabcc7;
+    cursor: pointer;
+}
+.palette:hover {
+    background-color: rgb(228, 244, 246);
+    box-shadow: 0 10px 0 0 #aab9c7, 0 5px 7px #838d9c;
+    transform: translateY(5px);
 }
 
 

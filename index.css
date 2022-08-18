@@ -53,12 +53,39 @@ h1 {
 .slider-container {
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
     gap: 20px;
 }
 .slider-container p {
-    padding: 10px 5px;
+    width: 60%;
+    margin: 0;
+    padding: 0;
     font-size: 30px;
 }
+input[type=range] {
+    /* Style for the horizontal bar of the slider */
+    -webkit-appearance: none;
+    width: 100%;
+    border-radius: 8px;
+    height: 5px;
+    border: none;
+    background: white;
+    outline: none;
+    box-shadow: 0 5px 10px  rgb(139, 172, 197);
+  }
+  input[type='range']::-webkit-slider-thumb {
+    /* style for the handlebar of the slider */
+    -webkit-appearance: none;
+    background-color: #0f5b6e;
+    border: 1px solid #05263d;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
 
 
 /* Style for the buttons that interact with the physical grid */

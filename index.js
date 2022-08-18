@@ -144,6 +144,8 @@ function toggle(e) {
         } else {
             e.target.style.backgroundColor = currentColour;
         }
+    } else if (colourMode==="colourPicker") {
+        e.target.style.backgroundColor = colourPickerID.value; 
     }
 }
   /**
@@ -170,7 +172,9 @@ clearID.addEventListener("click", () => {
 eraserID.addEventListener("click", () => {colourMode = "eraser"});
 eyedropID.addEventListener("click", () => {
     colourRetrieved = false;  // so that it can pick a new colour
-    colourMode = "eyedropper"});
+    colourMode = "eyedropper"
+});
+colourPickerID.addEventListener("click", () => {colourMode = "colourPicker";});
 
 
 window.onload = (event) => {

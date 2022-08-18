@@ -13,6 +13,8 @@ const cold = ["#eff6e0", "#aec3b0", "#598392", "#124559", "#aef2ee", "#9195B8", 
 const bubblegum = ["#fbb9c5", "#e6c8fe", "#fcf7e3", "#c3edbf", "#b8dfe6", "#a14a76", "#ffa8a9", "#2c0915"];
 const clearID = document.getElementById("clear");
 const eyedropID = document.getElementById("eyedrop");
+let colourRetrieved = false;  // marker indicating if a colour from eyedropper is caught
+let currentColour = "";  // the newly picked colour from eyedropper
 const eraserID = document.getElementById("eraser");
 const colourPickerID = document.getElementById("colourPicker");
 
@@ -134,6 +136,14 @@ function toggle(e) {
         });
         // since the code passed the loop, the div has a coloured background
         e.target.style.backgroundColor = "rgb(255, 255, 255)";
+    } else if (colourMode==="eyedropper") {
+        if (colourRetrieved == false) {
+            currentColour = window.getComputedStyle(e.target, null).getPropertyValue("background-color");
+            colourRetrieved = true;
+            return;
+        } else {
+            e.target.style.backgroundColor = currentColour;
+        }
     }
 }
   /**
@@ -158,6 +168,9 @@ clearID.addEventListener("click", () => {
     createGrid(slider.value);
 })
 eraserID.addEventListener("click", () => {colourMode = "eraser"});
+eyedropID.addEventListener("click", () => {
+    colourRetrieved = false;  // so that it can pick a new colour
+    colourMode = "eyedropper"});
 
 
 window.onload = (event) => {

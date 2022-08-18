@@ -11,6 +11,10 @@ let colourMode = "";  // signifies what colour a div's background should have
 const warm = ["#ffedbf", "#ffcd74", "#ffca7b", "#ff7251", "#9b2948", "#cf6d23", "#f5bc11", "#cf2743"];
 const cold = ["#eff6e0", "#aec3b0", "#598392", "#124559", "#aef2ee", "#9195B8", "#C8B7BE", "#6E8FCA"];
 const bubblegum = ["#fbb9c5", "#e6c8fe", "#fcf7e3", "#c3edbf", "#b8dfe6", "#a14a76", "#ffa8a9", "#2c0915"];
+const clearID = document.getElementById("clear");
+const eyedropID = document.getElementById("eyedrop");
+const eraserID = document.getElementById("eraser");
+const colourPickerID = document.getElementById("colourPicker");
 
 
 /**
@@ -126,12 +130,16 @@ warmBtnID.addEventListener("click", () => {colourMode = "warm"});
 coldBtnID.addEventListener("click", () => {colourMode = "cold"});
 bubblegumBtnID.addEventListener("click", () => {colourMode = "bubblegum"});
 monochromeBtnID.addEventListener("click", () => {colourMode = "monochrome"});
+clearID.addEventListener("click", () => {
+    removeGrid();
+    createGrid(slider.value);
+})
 
 
 window.onload = (event) => {
     sliderOutput.textContent = `${slider.value} x ${slider.value}`;
     colourMode="rainbow";
-    createGrid();
+    createGrid(slider.value);
 }
 
 

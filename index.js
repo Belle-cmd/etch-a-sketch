@@ -50,6 +50,21 @@ function removeGrid() {
 }
 
 
+/**
+ * This function takes rgb in type string, and uses regular expressions to retrieve the rgb values.
+ * @param {*} string rgb format but in type string
+ * @returns array containing the rgb values of type number
+ */
+function rgbSlicer(string) {
+    const regex = /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/;  // regex parsing rgb() string
+    const match = regex.exec(string);
+    const r = Number(match[1]);  // retrieve individual rgb values
+    const g = Number(match[2]);
+    const b = Number(match[3]);
+    return [r, g, b];
+}
+
+
 // functions in charge of changing cell colours
 
 /**
@@ -92,17 +107,16 @@ function toggle(e) {
         e.target.style.backgroundColor = bubblegum[index];
     } else if (colourMode==="monochrome") {
         const rgb = window.getComputedStyle(e.target, null).getPropertyValue("background-color");
-        const regex = /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/;  // regex parsing rgb() string
-        const match = regex.exec(rgb);
-        const oldR = Number(match[1]);  // retrieve individual rgb values
-        const oldG = Number(match[2]);
-        const oldB = Number(match[3]);
+        const rgbArray = rgbSlicer(rgb);
+        const oldR = rgbArray[0];
+        const oldG = rgbArray[1];
+        const oldB = rgbArray[2];
         
         if ((oldR <= 120 && oldR>0) && (oldG<=120 && oldG>0) && (oldB<= 120 && oldB>0)) {
             // if the rgb values are already grey, subtract to darken it
-            const r = Number(match[1]) - 12;
-            const g = Number(match[2]) - 12;
-            const b = Number(match[3]) - 12;
+            const r = oldR - 12;
+            const g = oldG - 12;
+            const b = oldB - 12;
             e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
         } else if ((oldR == 0) && (oldG == 0) && (oldB == 0)) {
             return;  // the div is already black, exit the function
@@ -110,7 +124,16 @@ function toggle(e) {
             // if the rgb value is not grey, make it so
             e.target.style.backgroundColor = "rgb(120, 120, 120)";
         }
-
+    } else if (colourMode==="eraser") {
+        const rgb = window.getComputedStyle(e.target, null).getPropertyValue("background-color");
+        const rgbArray = rgbSlicer(rgb);
+        rgbArray.forEach(element => {
+            if (element !== 255) {
+                return;  // end the function without doing anything
+            }
+        });
+        // since the code passed the loop, the div has a coloured background
+        e.target.style.backgroundColor = "rgb(255, 255, 255)";
     }
 }
   /**
@@ -134,6 +157,7 @@ clearID.addEventListener("click", () => {
     removeGrid();
     createGrid(slider.value);
 })
+eraserID.addEventListener("click", () => {colourMode = "eraser"});
 
 
 window.onload = (event) => {

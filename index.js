@@ -17,6 +17,7 @@ let colourRetrieved = false;  // marker indicating if a colour from eyedropper i
 let currentColour = "";  // the newly picked colour from eyedropper
 const eraserID = document.getElementById("eraser");
 const colourPickerID = document.getElementById("colourPicker");
+const gridSwitchID = document.getElementById("gridSwitch");
 
 
 /**
@@ -175,6 +176,17 @@ eyedropID.addEventListener("click", () => {
     colourMode = "eyedropper"
 });
 colourPickerID.addEventListener("click", () => {colourMode = "colourPicker";});
+gridSwitchID.addEventListener("click", () => {
+    let children = canvas.children;
+    for (var i = 0; i < children.length; i++) {
+        if (children[i].classList.contains("border")) {
+            children[i].classList.remove("border");
+        } else {
+            children[i].classList.add("border");
+        }
+      }
+
+});
 
 
 window.onload = (event) => {
